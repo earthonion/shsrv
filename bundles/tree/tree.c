@@ -40,7 +40,11 @@ void gen_branch(int last, char *path, char **branch){
 int tree( char *path, int *dir_cnt, int *file_cnt) {
     
     DIR *dir = opendir(path);
-    if(!dir) {printf("err path: %s\n", path);}
+    if(!dir) {
+        perror("opendir");
+        printf("error path: %s\n", path);
+        return -1;
+        }
     struct dirent *entry = NULL;
     
     while((entry = readdir(dir)) != NULL) {
