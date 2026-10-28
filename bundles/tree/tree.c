@@ -89,16 +89,18 @@ int tree( char *path, int *dir_cnt, int *file_cnt) {
 int main(int argc, char** argv) {
     int dc = 0;
     int fc = 0;
+    char *path = NULL;
     
     if(argc < 2) {
-        char *pwd = getenv("PWD");
-        tree(pwd, &dc, &fc);
+        path = getenv("PWD");
     }
     else {
-        tree(argv[1], &dc, &fc);
+        path = argv[1];
     }
-    printf("\n%d directories %d files\n", (int)dc, (int)fc);
     
+    if(tree(path, &dc, &fc) == 0) {
+        printf("\n%d directories %d files\n", (int)dc, (int)fc);
+    }
     return 0;
     
 }
